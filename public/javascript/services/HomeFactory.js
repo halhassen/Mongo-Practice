@@ -22,14 +22,14 @@
 			});
 			return q.promise;
 		};
-		o.createMovie = function(movie) {
+		o.submitMovie = function(movie) {
 			var auth = {
 				headers: {
 					Authorization: "Bearer " + localStorage.getItem("token")
 				}
 			}
 			var q = $q.defer();
-			$http.post('/api/movies', movie, auth).success(function(res) {
+			$http.post('/api/movies/', movie, auth).success(function(res) {
 				console.log(res);
 				q.resolve();
 			});
@@ -39,18 +39,14 @@
 		o.editMovie = function(newMovie, oldMovie) {
 			var q = $q.defer();
 			$http.put('/api/movies/' + oldMovie._id, newMovie).success(function(res) {
-				o.movies.splice(o.movies.indexOf(oldMovie) - 1, 1, newMovie);
+				//o.movies.splice(o.movies.indexOf(oldMovie) - 1, 1, newMovie);
 				q.resolve();
 			});
 			return q.promise;
 		};
 
 		o.deleteMovie = function(movie) {
-			console.log("delete 2");
-
 			$http.delete('/api/movies/' + movie._id).success(function(res) {
-				console.log("delete 3");
-				//o.movies.splice(o.movies.indexOf(o.movie), 1);
 			});
 		};
 

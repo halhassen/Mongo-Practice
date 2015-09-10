@@ -54,6 +54,18 @@
 		$rootScope._user = isLoggedIn();
 	};
 
+	function urlBase64Decoder(str) {
+		var output = str.replace(/-/g, '+').replace(/_/g, '/');
+		switch(output.length % 4) {
+			case 0: break;
+			case 2: {output += '=='; break;}
+			case 3: {output += '='; break;}
+			default: 
+			throw 'Illegal base64 url string';
+		}
+		return decodeURIComponent(escape($window.atob(output)));
+	};
+
 	$rootScope._user = isLoggedIn();
 	return o;
 }

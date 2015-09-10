@@ -9,7 +9,7 @@
 			</ul>
 			<button ui-sref="MovieInfo({id: movie._id})" class="btn btn-info">See Movie</button>
 			<button ng-click="vm.deleteMovie(movie)" class="btn btn-danger">Delete Movie</button>
-			<button ng-click="vm.finishMovie()" class="btn btn-warning">Edit Movie</button>
+			<button ui-sref="EditMovie({id: movie._id})" class="btn btn-warning">Edit Movie</button>
 		</div>		
 	</div>
 </div>

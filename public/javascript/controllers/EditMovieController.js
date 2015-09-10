@@ -15,7 +15,7 @@
 
 
 		vm.submitMovie = function() {
-			HomeFactory.editMovie(vm.movie).then(function(res) {
+			HomeFactory.editMovie(vm.movie, vm.movieCopy).then(function(res) {
 				$state.go('Home');
 			})
 		};

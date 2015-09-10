@@ -3,9 +3,9 @@
 	angular.module('app')
 	.controller('HomeController', HomeController);
 
-	HomeController.$inject = ['HomeFactory'];
+	HomeController.$inject = ['HomeFactory', '$stateParams'];
 
-	function HomeController(HomeFactory) {
+	function HomeController(HomeFactory, $stateParams) {
 		var vm = this;
 		vm.title = 'Welcome to our App!';
 
@@ -14,8 +14,11 @@
 			console.log(res);
 		});
 
-		vm.startEdit = function() {
-
+		vm.startEdit = function($stateParams) {
+			HomeFactory.getMovie($stateParams.id).then(function(res) {
+				vm.movie = res;
+				console.log(res);
+			})
 		};
 
 		vm.deleteMovie = function(movie) {

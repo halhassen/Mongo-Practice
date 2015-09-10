@@ -52,17 +52,17 @@ router.post('/', auth, function(req, res) {
 });
 
 //Edit
-//use req.body for all of them?
-
+//use req.body for the whole object
+//Passed in _id: req._id to help find the object
 router.put('/:id', function(req, res) {
-	Movie.update({}).exec(function(err, result) {
+	Movie.update({_id: req._id}, req.body).exec(function(err, result) {
 		res.send();
 	})
 });
 
 //When putting : on a router path, colon says what comes after : is a variable. like a guid
 router.delete("/:id", function(req,res){
- Movie.remove({_id:req._id}) //_id is the property, req._id is the value
+ Movie.remove({_id: req._id}) //_id is the property, req._id is the value
  .exec(function(err, movies){
  	if(err) return res.status(500).send({err: "error with getting all movies"});
  	if(!movies) return res.status(400).send({err:"movies do not exist"});

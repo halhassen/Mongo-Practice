@@ -1,4 +1,4 @@
-<form class="well container" ng-submit="vm.createMovie()">
+<form class="well container" ng-submit="vm.submitMovie()">
 	<label>Title<span ng-if="vm.movieCopy.title">: {{vm.movieCopy.title}}</span></label><br/>
 	<input required class="form-control" placeholder="Movie Title..." ng-model="vm.movie.title" />	
 	<label>Created<span ng-if="vm.movieCopy.created">: {{vm.movieCopy.created}}</span></label><br/>

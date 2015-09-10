@@ -12,5 +12,12 @@
 				$state.go('Home');
 			});
 		};
+
+		vm.submitMovie = function() {
+			vm.movie.created = new Date(vm.movie.created + '-1-1');
+			HomeFactory.submitMovie(vm.movie).then(function() {
+				$state.go('Home');
+			});
+		};
 	}
 })();
