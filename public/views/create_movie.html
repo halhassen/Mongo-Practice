@@ -1,9 +1,9 @@
 <form class="well container" ng-submit="vm.createMovie()">
-	<label>Title</label><br/>
+	<label>Title<span ng-if="vm.movieCopy.title">: {{vm.movieCopy.title}}</span></label><br/>
 	<input required class="form-control" placeholder="Movie Title..." ng-model="vm.movie.title" />	
-	<label>Created</label><br/>
+	<label>Created<span ng-if="vm.movieCopy.created">: {{vm.movieCopy.created}}</span></label><br/>
 	<input required class="form-control" placeholder="Movie Year..." ng-model="vm.movie.created" />	
-	<label>Rating</label><br/>
+	<label>Rating<span ng-if="vm.movieCopy.rating">: {{vm.movieCopy.rating}}</span></label><br/>
 	<select required ng-model="vm.movie.rating" class="form-control">
 		<option value="1">1</option>
 		<option value="2">2</option>
@@ -16,9 +16,9 @@
 		<option value="9">9</option>
 		<option value="10">10</option>
 	</select>
-	<label>Director</label><br/>
+	<label>Director<span ng-if="vm.movieCopy.director">: {{vm.movieCopy.director}}</span></label><br/>
 	<input required class="form-control" placeholder="Movie Director..." ng-model="vm.movie.director" />	
-	<label>Actors</label><br/>
+	<label>Actors<span ng-if="vm.movieCopy.actors">: {{vm.movieCopy.actors}}</span></label><br/>
 	<input required class="form-control" ng-list placeholder="Movie Actors..." ng-model="vm.movie.actors" />					
 	<div style="text-align: center;">
 		<button type="submit" class="btn btn-success">Submit</button>

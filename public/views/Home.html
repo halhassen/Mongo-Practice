@@ -1,3 +1,15 @@
 <div ng-controller="HomeController as vm">
-	<h1>{{vm.title}}</h1>
+	<div ng-repeat="movie in vm.movies">
+		<div class="well col-sm-4 movie-well">
+			<h2>{{movie.title}}</h2>
+			<h4>{{movie.director}}</h4>
+			<h4><i>created: {{movie.created | date:"yyyy"}}</i></h4>
+			<ul>
+				<li ng-repeat="a in movie.actors | limitTo:5">{{a}}</li>
+			</ul>
+			<button ui-sref="MovieInfo({id: movie._id})" class="btn btn-info">See Movie</button>
+			<button ng-click="vm.deleteMovie(movie)" class="btn btn-danger">Delete Movie</button>
+			<button ng-click="vm.finishMovie()" class="btn btn-warning">Edit Movie</button>
+		</div>		
+	</div>
 </div>

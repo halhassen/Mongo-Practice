@@ -1,0 +1,9 @@
+<div class="well container">
+	<h1 style="text-align: center;">{{vm.movie.title}}</h1>
+	<h3>Directed by: {{vm.movie.director}}</h3>
+	<h3>Year: {{vm.movie.created | date:'yyyy'}}</h3>
+	<h4>Actors:</h4>
+	<ul>
+		<li ng-repeat="a in vm.movie.actors">{{a}}</li>
+	</ul>
+</div>

@@ -12,6 +12,22 @@
 			templateUrl: 'views/create_movie.html',
 			controller: 'CreateMovieController',
 			controllerAs: 'vm'
+		}).state('EditMovie', {
+			url: '/Movie/Edit/:id',
+			templateUrl: 'views/create_movie.html',
+			controller: 'EditMovieController',
+			controllerAs: 'vm'
+		}).state('RegisterUser', {
+			url: '/Register',
+			templateUrl: 'views/register_user.html'
+		}).state('LoginUser', {
+			url: '/Login',
+			templateUrl: 'views/login_user.html'
+		}).state('MovieInfo', {
+			url: '/Movie/:id',
+			templateUrl: 'views/movie_info.html',
+			controller: 'MovieDetailsController',
+			controllerAs: 'vm'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

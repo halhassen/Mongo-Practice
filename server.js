@@ -6,8 +6,9 @@ var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
 //models here
 require('./models/Movie');
+require('./models/User');
 //connection
-mongoose.connect('mongodb://localhost/movies');
+mongoose.connect('mongodb://localhost/movies_app');
 
 app.set('views', path.join(__dirname, 'views'));
 //set the view engine that will render HTML from the server to the client
@@ -26,12 +27,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 var movieRoutes = require('./routes/MovieRoutes');
-
+var userRoutes = require('./routes/UserRoutes');
 //on homepage load, render the index page
 app.get('/', function(req, res) {
 	res.render('index');
 });
 app.use('/api/movies', movieRoutes);
+app.use('/api/users', userRoutes);
 
 var server = app.listen(port, function() {
 	var host = server.address().address;
