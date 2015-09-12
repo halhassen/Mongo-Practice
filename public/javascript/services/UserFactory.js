@@ -5,37 +5,38 @@
 
 	function UserFactory($q, $http, $window, $rootScope) {
 		var o = {};
-		o.status = {};
+		//o.status = {};
 	//	vm.status = $rootScope.user;
 
-	var setToken = function(token) {
+	function setToken(token) {
 		localStorage.setItem("token", token);
-	};
+	}
 
-	var getToken = function(token) {
+	function removeToken() {
+		localStorage.removeItem("token");
+	}
+
+	function getToken() {
 		return localStorage.token;
-	};
+	}
 
-	var isLoggedIn = function() {
+	function isLoggedIn() {
 		var token = getToken();
 		if(token) {
-			var payload = JSON.parse($window.atob(token.split(".")[1]));
+			var payload = JSON.parse(urlBase64Decoder(token.split(".")[1]));
 			if(payload.exp > Date.now() / 1000) {
 				return payload;
 			}
-			else {
-				return ;
-			}
+		} else {
+			return false;
 		}
-	};
+	}
 
 	o.register = function(user) {
 		var q = $q.defer();
 		$http.post('/api/users/register', user).success(function(res) {
-				// o.status.isLoggedIn = true;
-				// o.status.username = user.username;
-				q.resolve();
-			});
+			q.resolve();
+		});
 		return q.promise;
 	};
 
@@ -54,14 +55,23 @@
 		$rootScope._user = isLoggedIn();
 	};
 
+	o.friendsList = function() {
+
+	};
+
+	o.profilePage = function() {
+		console.log('profile')
+	};
+
+
 	function urlBase64Decoder(str) {
 		var output = str.replace(/-/g, '+').replace(/_/g, '/');
 		switch(output.length % 4) {
-			case 0: break;
+			case 0:{break; }
 			case 2: {output += '=='; break;}
 			case 3: {output += '='; break;}
-			default: 
-			throw 'Illegal base64 url string';
+			default:
+			throw 'Illegal base64url string'
 		}
 		return decodeURIComponent(escape($window.atob(output)));
 	};

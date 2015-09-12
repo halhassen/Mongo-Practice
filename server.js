@@ -4,9 +4,13 @@ var bodyParser = require('body-parser');
 var app = express();
 var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
+var passport = require('passport'); //passport below mongoose
 //models here
 require('./models/Movie');
 require('./models/User');
+require('./models/Movie_Comment');
+//passport at the bottom of the models
+require('./config/passport');
 //connection
 mongoose.connect('mongodb://localhost/movies_app');
 
@@ -23,16 +27,21 @@ app.set('view options', {
 });
 
 //middleware that allows for us to parse JSON and UTF-8 from the body of an HTTP request
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
 var movieRoutes = require('./routes/MovieRoutes');
 var userRoutes = require('./routes/UserRoutes');
+var commentRoutes = require('./routes/CommentRoutes');
 //on homepage load, render the index page
 app.get('/', function(req, res) {
 	res.render('index');
 });
 app.use('/api/movies', movieRoutes);
+app.use('/api/comments', commentRoutes);
 app.use('/api/users', userRoutes);
 
 var server = app.listen(port, function() {

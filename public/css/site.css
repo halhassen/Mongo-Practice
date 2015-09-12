@@ -1,9 +1,19 @@
 .movie-well {
-	height: 300px;
+	height: 350px;
 	position: relative;
 }
 
 .movie-button {
 	bottom: 12px;
 	position: absolute;
+}
+
+.commentBox {
+	width: 500px;
+	padding-left: 10px;
+	padding-top: 10px;
+	height: 100%;
+	background: #E6EBED;
+	color: black;
+	border-radius: 15px 15px;
 }

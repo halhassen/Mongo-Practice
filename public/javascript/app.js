@@ -28,6 +28,16 @@
 			templateUrl: 'views/movie_info.html',
 			controller: 'MovieDetailsController',
 			controllerAs: 'vm'
+		}).state('FriendList', {
+			url: "/FriendList",
+			templateUrl: 'views/friend_list.html',
+			controller: 'NavbarController',
+			controllerAs: 'vm'
+		}).state('Profile', {
+			url: "/Profile/:id",
+			templateUrl: 'views/profile.html',
+			controller: 'NavbarController',
+			controllerAs: 'vm'
 		});
 		$urlRouterProvider.otherwise('/');
 	}

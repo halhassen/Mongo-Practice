@@ -5,7 +5,8 @@ var MovieSchema = mongoose.Schema({
 	created: Date,
 	rating: Number, //0 - 10 user rating,
 	director: mongoose.Schema.Types.Mixed,
-	actors: [{type: String}]
+	actors: [{type: String}],
+	comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieComment'}]
 });
 
 mongoose.model('Movie', MovieSchema);

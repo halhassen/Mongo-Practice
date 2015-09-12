@@ -1,9 +1,9 @@
 (function() {
 	"use strict";
 	angular.module('app').controller('NavbarController', NavbarController);
-	NavbarController.$inject = ['$state', 'UserFactory', "$rootScope"];
+	NavbarController.$inject = ['$state', 'UserFactory', "$rootScope", "$stateParams"];
 
-	function NavbarController($state, UserFactory, $rootScope) {
+	function NavbarController($state, UserFactory, $rootScope, $stateParams) {
 		var vm = this;
 		vm.user = {};
 		vm.status = $rootScope._user;
@@ -26,6 +26,20 @@
 			UserFactory.logout();
 			vm.status = $rootScope._user;
 			$state.go("Home");
+		};
+
+		vm.friends = function() {
+			UserFactory.friendsList() 
+			vm.status = $rootScope._user
+			$state.go('FriendList')
+		};
+		//$stateParams gives access to the id passed
+		vm.profilePage = function($stateParams) {
+			console.log('profile')
+			UserFactory.profilePage();
+			vm.status = $rootScope._user
+			$state.go('Profile')
 		}
+
 	}
 })();

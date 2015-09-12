@@ -8,6 +8,15 @@
 	function HomeFactory($http, $q) {
 		var o = {};
 
+		var getAuth = function() {
+			var auth = {
+				headers: {
+					Authorization: "Bearer " + localStorage.getItem("token")
+				}
+			}
+			return auth;
+		}
+
 		o.getMovie = function(id) {
 			var q = $q.defer();
 			$http.get('/api/movies/' + id).success(function(res) {
@@ -23,13 +32,8 @@
 			return q.promise;
 		};
 		o.submitMovie = function(movie) {
-			var auth = {
-				headers: {
-					Authorization: "Bearer " + localStorage.getItem("token")
-				}
-			}
 			var q = $q.defer();
-			$http.post('/api/movies/', movie, auth).success(function(res) {
+			$http.post('/api/movies/', movie, getAuth()).success(function(res) {
 				console.log(res);
 				q.resolve();
 			});
@@ -37,9 +41,13 @@
 		};
 
 		o.editMovie = function(newMovie, oldMovie) {
+			var auth = {
+				headers: {
+					Authorization: "Bearer " + localStorage.getItem("token")
+				}
+			};
 			var q = $q.defer();
 			$http.put('/api/movies/' + oldMovie._id, newMovie).success(function(res) {
-				//o.movies.splice(o.movies.indexOf(oldMovie) - 1, 1, newMovie);
 				q.resolve();
 			});
 			return q.promise;
@@ -47,6 +55,20 @@
 
 		o.deleteMovie = function(movie) {
 			$http.delete('/api/movies/' + movie._id).success(function(res) {
+			});
+		};
+
+		o.createComment = function(comment) {
+			var q = $q.defer();
+			$http.post('/api/comments/', comment, getAuth()).success(function(res) {
+				q.resolve(res);
+			})
+			return q.promise;
+		};
+
+		o.deleteComment = function(comment) {
+			$http.delete('/api/comments/' + comment._id, getAuth()).success(function(res) {
+				
 			});
 		};
 

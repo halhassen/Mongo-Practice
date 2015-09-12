@@ -13,14 +13,47 @@ router.param('id', function(req, res, next, id) {
 	req._id = id;
 	next();
 });
-
+/*
 router.param('id', function(req, res, next, id) {
 	Movie.findOne({_id:id})
+	.populate('comments')
 	.exec(function(err, movie) {
 		if(err) return res.status(500).send({err: "Error inside the server."});
 		if(!movie) return res.status(400).send({err: "That movie does not exist"});
 		req.movie = movie;
+		console.log(movie.comments)
 		next();
+	});
+});
+*/
+router.param('id', function(req, res, next, id) {
+	Movie.findOne({_id:id})
+	// finding the movie by id
+	.populate({ path: "comments"})
+	// populating comment array, path = property to populate
+	.exec(function(err, comments) {
+		// comments = comments array on movie without populated user references
+		// var options = {
+		// 	path: 'comments.user',
+		// 		// populate the user on each comment array element by the reference
+		// 	model: 'User',
+		// 		// the model we wish to populate from the reference
+		// 	select: "username"
+		// 		// properties and values we want to be populated on the user object inside each comment user object.
+		// };
+
+		Movie.populate(comments, {
+			path: 'comments.user',
+			model: 'User',
+			select: "username"
+		}, function (err, movie) {
+			if(err) return res.status(500).send({err: "Error inside the server."});
+			if(!movie) return res.status(400).send({err: "That movie does not exist"});
+			req.movie = movie;
+			console.log(movie.comments)
+			next();
+		});
+
 	});
 });
 
@@ -38,6 +71,7 @@ router.get('/', function(req, res) {
 
 //Get one movie
 router.get('/:id', function(req, res) {
+	console.log(req.movie);
 	res.send(req.movie);
 });
 

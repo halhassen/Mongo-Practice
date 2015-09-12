@@ -1,0 +1,12 @@
+<div ng-controller="NavbarController as vm">
+	<div ng-repeat="u in vm.user">
+		<div class="well col-sm-4 movie-well">
+			<h2>{{u.email}}</h2>
+			<button ui-sref="MovieInfo({id: movie._id})" class="btn btn-info">See Movie</button>
+			<button ng-click="vm.deleteMovie(movie)" class="btn btn-danger">Delete Movie</button>
+			<button ui-sref="EditMovie({id: movie._id})" class="btn btn-warning">Edit Movie</button>
+		</div>		
+	</div>
+	<div ng-repeat="u in vm.user">
+	</div> 
+</div>

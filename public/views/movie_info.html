@@ -7,3 +7,21 @@
 		<li ng-repeat="a in vm.movie.actors">{{a}}</li>
 	</ul>
 </div>
+<br>
+<div class="well container" ng-if="nav.status.id">
+	<div style="text-align:center;">
+		<button class="btn btn-lg btn-primary" ng-show="!addComment" ng-click="addComment = true;">Add Comment</button>
+		<div class="form-inline" ng-show="addComment">
+			<input class="form-control" style="width: 80%" ng-model="vm.newComment" placeholder="Comment...">
+			<button class="btn btn-success" ng-click="addComment = false; vm.createComment();">Submit</button>
+			<button class="btn btn-danger" ng-click="addComment = false;">Cancel</button>
+		</div><br/><br/>
+		<div class="text-left container">
+			<div class="commentBox" ng-repeat="c in vm.movie.comments">
+				<h5>{{c.user.username}} - {{c.created | date:"d/M/yyyy"}}</h5><hr/>
+				<p>{{c.body}}</p><br>
+				<button class="btn btn-danger" style="margin-bottom: 15px;" ng-click="vm.deleteComment(c)">Delete Comment</button>
+			</div><br><br>
+		</div>
+	</div>
+</div>

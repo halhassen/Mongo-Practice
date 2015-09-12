@@ -14,12 +14,7 @@
 			console.log(res);
 		});
 
-		vm.startEdit = function($stateParams) {
-			HomeFactory.getMovie($stateParams.id).then(function(res) {
-				vm.movie = res;
-				console.log(res);
-			})
-		};
+
 
 		vm.deleteMovie = function(movie) {
 			vm.movies.splice(vm.movies.indexOf(movie), 1);

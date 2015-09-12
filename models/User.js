@@ -2,16 +2,14 @@ var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 
-//read more about jwt http://students.codercamps.com/Troop/Lesson/1957?troopUserId=12184&sectionId=120
-
-
-var UserSchema = mongoose.Schema({
+var UserSchema = new mongoose.Schema({
 	username: {type: String, lowercase: true, unique: true},
 	email: {type: String, lowercase: true, unique: true},
 	name: String,
 	image: String,
 	passwordHash: String,
-	salt: String
+	salt: String,
+	comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieComment'}]
 });
 
 UserSchema.methods.generateJWT = function() {
